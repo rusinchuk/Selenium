@@ -1,0 +1,31 @@
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
+
+
+driver = webdriver.Chrome(executable_path=r"C:\Selenium\chromedriver_win32\chromedriver.exe")
+driver.get("https://demo.oxwall.com")
+el_sign_in = driver.find_element(By.CLASS_NAME, "ow_signin_label")
+el_sign_in.click()
+el_login = driver.find_element(By.NAME, "identity")
+el_login.clear()
+el_login.send_keys("demo")
+el_password = driver.find_element(By.NAME, "password")
+el_password.clear()
+el_password.send_keys("demo")
+el_authentication = driver.find_element(By.CLASS_NAME, "ow_positive")
+el_authentication.click()
+driver.implicitly_wait(2)
+el_input_field = driver.find_element(By.CLASS_NAME, "ow_newsfeed_status_input")
+el_input_field.clear()
+el_input_field.send_keys("Test post from Sergii")
+el_post = driver.find_element(By.NAME, "save")
+el_post.click()
+menu = driver.find_element(By.CLASS_NAME, "ow_console_dropdown_hover")
+menu.click()
+submenu = driver.find_element_by_css_selector('[href="https://demo.oxwall.com/sign-out"]')
+actions = ActionChains(driver)
+actions.move_to_element(menu)
+actions.move_to_element (submenu)
+actions.click()
+actions.perform()
